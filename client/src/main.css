@@ -1,0 +1,213 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin: 1rem 6rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: slategray;
+  padding: 6px 30px;
+}
+
+.nav h1 {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 0;
+  color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.nav ul {
+  display: flex;
+  gap: 8px;
+}
+
+.nav ul li {
+  list-style-type: none;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.nav ul li a:hover {
+  color: black;
+}
+
+.nav ul li button {
+  background: none;
+  color: white;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.nav ul li button:hover{
+  color: black;
+}
+
+.form-container {
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form h1 {
+  padding: 0;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.form label {
+  font-size: large;
+}
+
+.form input {
+  padding: 8px 10px;
+  font-size: 20px;
+  min-width: 350px;
+  max-width: 600px;
+  height: 25px;
+  border: none;
+  border: 1px solid lightblue;
+  background-color: lightcyan;
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.form input:focus {
+  border: 1px solid black;
+}
+
+.form button {
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 8px;
+  background-color: blue;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.form button:hover {
+  background-color: rgb(0, 0, 218);
+}
+
+.form button:disabled {
+  opacity: 50%;
+  background-color: blue;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 16px;
+  position: relative;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.profile {
+  height: max-content;
+  position: fixed;
+  background-color: slategray;
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+.profile img {
+  width: 14rem;
+  border-radius: 50%;
+  border: 2px solid rgb(80, 99, 119);
+}
+
+.profile h1{
+  color: white;
+  background-color: rgb(80, 99, 119);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+:root {
+  --bg: #1c1717;
+}
+@property --a {
+  initial-value: 0deg;
+  inherits: false;
+  syntax: '<angle>';
+}
+@property --h {
+  initial-value: 0;
+  inherits: false;
+  syntax: '<number>';
+}
+.loader {
+  padding: 2rem 4rem;
+  font-family: monospace;
+  font-weight: bold;
+  color: black;
+  border-style: solid;
+  border-width: 1vmin;
+  font-size: 2rem;
+  --charge: hsl(var(--h, 0), 80%, 50%);
+  -o-border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+     border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+  -webkit-animation: load 2s infinite ease-in-out;
+          animation: load 2s infinite ease-in-out;
+}
+@-webkit-keyframes load {
+  0%, 10% {
+    --a: 0deg;
+    --h: 0;
+  }
+  100% {
+    --a: 360deg;
+    --h: 100;
+  }
+}
+@keyframes load {
+  0%, 10% {
+    --a: 0deg;
+    --h: 0;
+  }
+  100% {
+    --a: 360deg;
+    --h: 100;
+  }
+}
