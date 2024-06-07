@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config()
 
 import authRouter from './routes/auth.route.js'
 import UserRouter from './routes/user.route.js'
@@ -10,7 +12,7 @@ import DB_CONNECT from './utils/database.js'
 
 const app = express()
 
-const PORT = env.process.PORT || 8000
+const PORT = process.env.PORT
 
 // App Configuration
 app.use(express.json())
