@@ -8,6 +8,7 @@ dotenv.config()
 import authRouter from './routes/auth.route.js'
 import UserRouter from './routes/user.route.js'
 
+import Error from './middlewares/Error.js'
 import isAuthenticated from './middlewares/isAuthenticated.js'
 
 import DB_CONNECT from './utils/database.js'
@@ -37,6 +38,9 @@ DB_CONNECT()
 // Router for Authentication
 app.use('/api/auth', authRouter)
 app.use('/api/user', isAuthenticated, UserRouter)
+
+// Middlewares
+app.use(Error)
 
 // Running Server
 app.listen(PORT, ()=>{
