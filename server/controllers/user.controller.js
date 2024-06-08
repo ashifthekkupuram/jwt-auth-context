@@ -51,3 +51,32 @@ export const update_username = async (req, res, next) => {
     }
 
 }
+
+export const update_profile = async (req, res, next) => {
+
+    const profile = req.file
+    const userId = jwt.decode(req.token, process.env.SECRET_KEY).id
+
+    if(!profile){
+        return res.status(400).json({
+            success: false,
+            message: 'An profile image is required'
+        })
+    }
+
+    try{
+        await User.findByIdAndUpdate(userId, {profile: profile.filename})
+        return res.status(200).json({
+            success: true,
+            message: 'Profile updated',
+            filename: profile.filename
+        })
+    }catch(err){
+        return res.status(400).json({
+            success: false,
+            message: 'Something went wrong',
+            error: err
+        })
+    }
+
+}
