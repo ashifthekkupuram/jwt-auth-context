@@ -27,7 +27,8 @@ const AuthProvider = ({children}) => {
         }
         verifyToken()
         setLoading(false)
-    },[user])
+        
+    },[])
 
     return (
         loading ? <Loading/> :<authContext.Provider value={{user, setUser}}>
