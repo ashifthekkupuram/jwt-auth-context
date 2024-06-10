@@ -145,7 +145,7 @@ export const verify = (req, res, next) => {
     })
   }
 
-  jwt.verify(token, process.env.SECRET_KEY, (err, data) => {
+  jwt.verify(token, process.env.SECRET_KEY, async (err, data) => {
     if(err){
         return res.status(400).json({
             success: false,
@@ -153,10 +153,16 @@ export const verify = (req, res, next) => {
             error: err
         })
     }else{
+        const user = await User.findById(data.id)
         return res.status(200).json({
             success: true,
             message: "Valid Token",
-            data, 
+            data: {
+              id: user._id,
+              email: user.email ,
+              username: user.username,
+              profile: user.profile
+            }, 
         })
     }
   })

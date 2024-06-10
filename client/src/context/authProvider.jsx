@@ -30,8 +30,12 @@ const AuthProvider = ({children}) => {
         
     },[])
 
+    const updateUser = (updatedUser) => {
+        setUser(updatedUser);
+      };
+
     return (
-        loading ? <Loading/> :<authContext.Provider value={{user, setUser}}>
+        loading ? <Loading/> :<authContext.Provider value={{user, setUser: updateUser}}>
         {children}
     </authContext.Provider>
     )

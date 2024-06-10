@@ -1,15 +1,45 @@
-import React, { useContext } from "react";
-
-import { authContext } from "../context/authProvider";
+import React, { useContext,useEffect,useRef,useState } from "react";
 import { Link } from "react-router-dom";
 
+import { authContext } from "../context/authProvider";
+import axios from "../api/axios";
+
 const Profile = () => {
-  const { user } = useContext(authContext);
+
+  const profileInput = useRef()
+  const { user, setUser } = useContext(authContext);
+  const [profile, setProfile] = useState('')
+
+  const onChange = async (e) => {
+    const formData = new FormData()
+    formData.append('profile',e.target.files[0])
+    try{
+      const response = await axios.post('/user/update_profile', formData, {headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }})
+      setUser({...user, profile: response.data.filename})
+      setProfile('');
+    }catch(err){
+      if(err?.response){
+        console.log(err.response.data.message)
+      }else{
+        console.log('Something went wrong')
+      }
+    }
+  }
+
+  const onClick = async (e) => {
+    e.preventDefault()
+    profileInput.current.click()
+  }
 
   return (
     <div className="container">
       <div className="profile">
-        <img src={user.profile} alt="profile" />
+
+        <input className="hide" value={profile} type="file" name="profile" id="profile" ref={profileInput} onChange={onChange} />
+
+        <img onClick={onClick} src={user.profile} alt="profile" />
         <h1>@{user.username}</h1>
         <Link to='/profile_form'>Change Username</Link>
       </div>

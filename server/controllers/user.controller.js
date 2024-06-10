@@ -65,11 +65,11 @@ export const update_profile = async (req, res, next) => {
     }
 
     try{
-        await User.findByIdAndUpdate(userId, {profile: profile.filename})
+        await User.findByIdAndUpdate(userId, {profile: `http://localhost:${process.env.PORT}/uploads/${profile.filename}`})
         return res.status(200).json({
             success: true,
             message: 'Profile updated',
-            filename: profile.filename
+            filename: `http://localhost:${process.env.PORT}/uploads/${profile.filename}`
         })
     }catch(err){
         return res.status(400).json({
