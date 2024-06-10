@@ -164,6 +164,14 @@ body {
   font-size: 1.5rem;
 }
 
+.profile a {
+  text-decoration: none;
+  color: white;
+  padding: 8px;
+  border-radius: 3px;
+  background: rgb(84, 97, 110);
+}
+
 :root {
   --bg: #1c1717;
 }

@@ -4,14 +4,14 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const isAuthenticated = (req, res, next) => {
-    if(req.headers.Authorization === undefined || req.headers.Authorization === null){
+    if(req.headers.authorization === undefined || req.headers.authorization === null){
         return res.status(401).json({
             success: false,
             message: "Unauthorized"
         })
     }
 
-    const token = req.headers.Authorization.split(' ')[1]
+    const token = req.headers.authorization.split(' ')[1]
 
     if(!token){
         return res.status(401).json({
