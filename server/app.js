@@ -7,6 +7,7 @@ dotenv.config()
 
 import authRouter from './routes/auth.route.js'
 import UserRouter from './routes/user.route.js'
+import postRouter from './routes/post.route.js'
 
 import Error from './middlewares/Error.js'
 import isAuthenticated from './middlewares/isAuthenticated.js'
@@ -38,6 +39,7 @@ DB_CONNECT()
 // Router for Authentication
 app.use('/api/auth', authRouter)
 app.use('/api/user', isAuthenticated, UserRouter)
+app.use('/api/post', postRouter)
 
 // Middlewares
 app.use(Error)
