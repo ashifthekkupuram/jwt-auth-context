@@ -1,15 +1,24 @@
-// import React,{useContext, useEffect} from 'react'
-// import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
 
-// import { authContext } from '../context/authProvider'
+import axios from "../api/axios";
+import Post from "../components/Post";
 
 const Home = () => {
+  const [posts, setPosts] = useState([]);
 
-  return (
-    <div>
-      Home
-    </div>
-  )
-}
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("/post");
+        setPosts(response.data.posts);
+      } catch (err) {
+        console.log(posts);
+      }
+    };
+    fetchPosts();
+  }, []);
 
-export default Home
+  return <div>{posts ? posts.map((post) => <Post post={post} />) : null}</div>;
+};
+
+export default Home;

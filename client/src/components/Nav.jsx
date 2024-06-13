@@ -21,6 +21,7 @@ const Nav = () => {
         {user ? (
           <>
             <li><Link to='/'>Home</Link></li>
+            <li><Link to='/create_post'>Create Post</Link></li>
             <li><Link to='/profile'>Profile</Link></li>
             <li><button onClick={onClick}>Logout</button></li>
           </>

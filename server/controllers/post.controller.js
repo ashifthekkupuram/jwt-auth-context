@@ -79,6 +79,13 @@ export const create_post = async (req, res, next) => {
             })
         }
 
+        if(!image){
+            return res.status(400).json({
+                success: false,
+                message: 'An image is required'
+            })
+        }
+
         if(!user){
             return res.status(400).json({
                 success: false,
@@ -88,10 +95,10 @@ export const create_post = async (req, res, next) => {
 
         try{
             const post = new Post({
-                title,
-                description,
+                title: title.trim(),
+                description: description.trim(),
                 author: user._id,
-                image: `http://localhost:${process.env.PORT}/uploads/${image.filename}`
+                image: image ? `http://localhost:${process.env.PORT}/uploads/${image.filename}` : undefined
             })
 
             await post.save()

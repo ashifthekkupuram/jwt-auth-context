@@ -11,6 +11,7 @@ import {
   NotFound404,
   Profile,
   ProfileForm,
+  PostForm,
 } from "./pages";
 
 const App = () => {
@@ -48,6 +49,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ProfileForm />
+              </ProtectedRoute>
+            }
+          />,
+          <Route
+            path="/create_post"
+            element={
+              <ProtectedRoute>
+                <PostForm />
               </ProtectedRoute>
             }
           />
