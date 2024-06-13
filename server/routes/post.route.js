@@ -1,6 +1,6 @@
-import express from express
+import express from 'express'
 
-import { get_posts, get_post } from '../controllers/user.controller.js'
+import { get_posts, get_post } from '../controllers/post.controller.js'
 
 const router = express.Router()
 
