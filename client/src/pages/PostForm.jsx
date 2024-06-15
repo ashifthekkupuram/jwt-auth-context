@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "../api/axios";
 
@@ -34,6 +35,7 @@ const PostForm = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}`,"Content-Type": "multipart/form-data" },
       });
       navigate("/");
+      toast.success('Post Created!')
     } catch (err) {
       if (err?.response) {
         setError(err.response.data.message);
@@ -44,8 +46,6 @@ const PostForm = () => {
     }
     setLoading(false);
   };
-
-  console.log(form);
 
   return (
     <div className="form-container">

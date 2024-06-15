@@ -1,5 +1,7 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css';
 
 import axios from '../api/axios'
 import { authContext } from '../context/authProvider'
@@ -30,6 +32,7 @@ const Login = () => {
       localStorage.setItem('token',response.data.token)
       setUser(response.data.data)
       navigate('/')
+      toast.success('Logged In')
     }catch(err){
       if(err?.response){
         setError(err.response.data.message)
@@ -41,7 +44,8 @@ const Login = () => {
   }
 
   return (
-    <div className='form-container'>
+    <>
+      <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Login Page</h1>
         {error ? <div className="alert alert-danger">{error}</div> : null}
@@ -52,6 +56,8 @@ const Login = () => {
         <button disabled={!(form.email.match(EMAIL_REGEX) && form.password) || loading}>{loading ? 'Loading...' : 'Login'}</button>
       </form>
     </div>
+    {/* <ToastContainer /> */}
+    </>
   )
 }
 

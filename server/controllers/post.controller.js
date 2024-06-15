@@ -9,7 +9,7 @@ const DESCRIPTION_REGEX = /^.{6,}$/
 
 export const get_posts = async (req, res, next) => {
     try{
-        const posts = await Post.find().populate('author', 'username').exec()
+        const posts = await Post.find().populate('author', 'username profile').sort('-createdAt').exec()
         return res.status(200).json({
             success: true,
             message: 'Post retrieved successfully',
@@ -35,7 +35,7 @@ export const get_post = async (req, res, next) => {
             })
         }
 
-        const post = await Post.findById(postId).populate('author', 'username')
+        const post = await Post.findById(postId).populate('author', 'username profile')
 
         if(!post){
             return res.status(404).json({
@@ -121,6 +121,25 @@ export const create_post = async (req, res, next) => {
             success: false,
             message: 'Something went wrong',
             error: err
+        })
+    }
+}
+
+export const delete_post = async (req, res, next) => {
+    try{
+       
+        await Post.findByIdAndDelete(req.params.postId)
+
+        return res.status(200).json({
+            success: true,
+            message: 'Post deleted'
+        })
+
+    }catch(err){
+        return res.status(400).json({
+            success: false,
+            message: 'Something went wrong',
+            error: err,
         })
     }
 }

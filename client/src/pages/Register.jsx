@@ -1,5 +1,7 @@
 import React, { useEffect, useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import { ToastContainer, toast } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css';
 
 import axios from '../api/axios'
 import { authContext } from '../context/authProvider'
@@ -28,7 +30,8 @@ const Register = () => {
     e.preventDefault()
     try{
       const response = await axios.post('/auth/register', form)
-      navigate('/')
+      navigate('/login')
+      // toast.success('Account Created')
     }catch(err){
       if(err?.response){
         setError(err.response.data.message)
@@ -40,6 +43,7 @@ const Register = () => {
   }
 
   return (
+    <>
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Register Page</h1>
@@ -53,6 +57,8 @@ const Register = () => {
         <button disabled={!(form.email.match(EMAIL_REGEX) && form.password && form.username) || loading}>{loading ? 'Loading...' : 'Register'}</button>
       </form>
     </div>
+    {/* <ToastContainer /> */}
+    </>
   )
 }
 
