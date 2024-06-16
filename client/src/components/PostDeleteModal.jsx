@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import axios from '../api/axios'
 
-const PostDeleteModal = ({setShowModal, postId, postTitle}) => {
+const PostDeleteModal = ({setShowModal, postId, postTitle, onHome, closeModal}) => {
 
     const navigate = useNavigate()
 
@@ -13,6 +13,9 @@ const PostDeleteModal = ({setShowModal, postId, postTitle}) => {
     const onDelete = async (e) => {
         try{
             await axios.delete(`post/${postId}`, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+            if(onHome){
+              closeModal()
+            }
             navigate('/')
             toast.success('Post Deleted')
         }catch(err){

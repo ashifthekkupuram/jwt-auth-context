@@ -245,6 +245,15 @@ body {
   font-size: 15px;
 }
 
+.post-footer button {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  font-size: 15px;
+
+}
+
 .post-container {
   display: flex;
   flex-direction: column;

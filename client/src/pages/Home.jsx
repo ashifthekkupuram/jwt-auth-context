@@ -9,6 +9,7 @@ import PostDeleteModal from "../components/PostDeleteModal";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState({id: null,title: ''}) 
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,18 +21,27 @@ const Home = () => {
       }
     };
     fetchPosts();
-  }, []);
+  }, [showModal]);
+
+  const handleDeleteClick = (post) => {
+    setSelectedPost({id: post._id, title: post.title})
+    setShowModal(true)
+  }
+
+  const closeModal = (e) => {
+    setShowModal(false)
+  }
 
   return (
     <>
       <div className="posts-container">
         {posts
           ? posts.map((post) => {
-              return <Post key={post._id} post={post} />;
+              return <Post key={post._id} post={post} onDelete={handleDeleteClick} />;
             })
           : null}
       </div>
-      {showModal ? <PostDeleteModal setShowModal={setShowModal} /> : null}
+      {showModal ? <PostDeleteModal closeModal={closeModal} setShowModal={setShowModal} postId={selectedPost.id} postTitle={selectedPost.title} onHome={true} /> : null}
       <ToastContainer />
     </>
   );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { authContext } from "../context/authProvider";
 
-const Post = ({ post }) => {
+const Post = ({ post,onDelete }) => {
   const { user } = useContext(authContext);
 
   return (
@@ -28,9 +28,9 @@ const Post = ({ post }) => {
             <Link style={{ backgroundColor: "green" }} to="profile">
               Edit
             </Link>
-            <Link style={{ backgroundColor: "red" }} to="profile">
+            <button style={{ backgroundColor: "red" }} onClick={() => onDelete(post)}>
               Delete
-            </Link>
+            </button>
           </>
         ) : null}
       </div>

@@ -53,7 +53,7 @@ const PostDetail = () => {
           <h1>No Post Found</h1>
         )}
       </div>
-      {showModal ? <PostDeleteModal postId={post._id} postTitle={post.title} setShowModal={setShowModal} /> : null}
+      {showModal ? <PostDeleteModal postId={post._id} postTitle={post.title} setShowModal={setShowModal} onHome={false} /> : null}
     </>
   );
 };
