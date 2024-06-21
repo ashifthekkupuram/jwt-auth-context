@@ -10,6 +10,18 @@ const Profile = () => {
   const { user, setUser } = useContext(authContext);
   const [profile, setProfile] = useState('')
 
+  useEffect(()=>{
+    const fetchUser = async () => {
+      try{
+        const response = await axios(`/user/${user.id}`)
+        console.log(response.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchUser()
+  },[])
+
   const onChange = async (e) => {
     const formData = new FormData()
     formData.append('profile',e.target.files[0])

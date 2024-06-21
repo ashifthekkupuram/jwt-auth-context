@@ -111,7 +111,7 @@ export const get_user = async (req, res, next) => {
             })
         }
 
-        const posts = Post.find({author: user}).populate('author', 'username profile')
+        const posts = await Post.find({author: user}).populate('author', 'username profile')
 
         return res.status(200).json({
             success: true,
@@ -121,6 +121,7 @@ export const get_user = async (req, res, next) => {
         })
 
     }catch(err){
+        console.log(err.message)
         return res.status(400).json({
             success: false,
             message: 'Something went wrong',
