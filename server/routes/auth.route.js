@@ -1,11 +1,13 @@
 import express from 'express'
 
-import { login,register,verify } from '../controllers/auth.controller.js'
+import { get_user,login,register,verify } from '../controllers/auth.controller.js'
+import isAuthenticated from '../middlewares/isAuthenticated.js'
 
 const router = express.Router()
 
-router.post('/login', login)
-router.post('/register', register)
-router.post('/verify', verify)
+router.get('/:userId', verify)
+router.post('/login',isAuthenticated, login)
+router.post('/register',isAuthenticated, register)
+router.post('/verify',isAuthenticated, verify)
 
 export default router

@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
 import User from '../models/user.model.js'
+import Post from '../models/post.model.js'
 
 dotenv.config()
 
@@ -79,4 +81,50 @@ export const update_profile = async (req, res, next) => {
         })
     }
 
+}
+
+export const get_user = async (req, res, next) => {
+    try{
+
+        const {userId} = req.params
+
+        if(!userId){
+            return res.status(400).json({
+                success: false,
+                message: "User id is required!"
+            })
+        }
+
+        if(!mongoose.Types.ObjectId.isValid(userId)){
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid user ID'
+            })
+        }
+
+        const user = await User.findById(userId, 'username profile')
+
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            })
+        }
+
+        const posts = Post.find({author: user}).populate('author', 'username profile')
+
+        return res.status(200).json({
+            success: true,
+            message: 'User Retrieved',
+            user,
+            posts
+        })
+
+    }catch(err){
+        return res.status(400).json({
+            success: false,
+            message: 'Something went wrong',
+            error: err
+        })
+    }
 }

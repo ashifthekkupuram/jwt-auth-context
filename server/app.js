@@ -38,7 +38,7 @@ DB_CONNECT()
 
 // Router for Authentication
 app.use('/api/auth', authRouter)
-app.use('/api/user', isAuthenticated, UserRouter)
+app.use('/api/user', UserRouter)
 app.use('/api/post', postRouter)
 
 // Middlewares
