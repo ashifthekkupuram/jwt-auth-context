@@ -4,14 +4,31 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.main{
+  margin-top: 5rem
+}
+
 .container {
-  margin: 1rem 6rem;
+  margin: 0 6rem;
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
+}
+
+.profile-posts-container {
+  margin-top: 5px;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  width: 600px;
 }
 
 .nav {
   display: flex;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  width: 96%;
   justify-content: space-between;
   background-color: slategray;
   padding: 6px 30px;

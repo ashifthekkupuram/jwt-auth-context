@@ -2,19 +2,21 @@ import React, { useContext,useEffect,useRef,useState } from "react";
 import { Link } from "react-router-dom";
 
 import { authContext } from "../context/authProvider";
+import Post from '../components/Post'
 import axios from "../api/axios";
 
 const Profile = () => {
 
   const profileInput = useRef()
   const { user, setUser } = useContext(authContext);
+  const [posts, setPosts] = useState([])
   const [profile, setProfile] = useState('')
 
   useEffect(()=>{
     const fetchUser = async () => {
       try{
         const response = await axios(`/user/${user.id}`)
-        console.log(response.data)
+        setPosts(response.data.posts)
       }catch(err){
         console.log(err)
       }
@@ -57,6 +59,9 @@ const Profile = () => {
       </div>
       <div className="profile-contents">
         posts
+      </div>
+      <div className="profile-posts-container">
+        {posts.map((post)=><Post post={post} />)}
       </div>
     </div>
   );

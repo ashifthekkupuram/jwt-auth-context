@@ -9,7 +9,7 @@ const Post = ({ post,onDelete }) => {
   return (
     <div className="post">
       <div className="post-header">
-        <img src={post.author.profile} alt="" />
+        <Link to={`/profile/${post.author._id}`}><img src={post.author.profile} alt="" /></Link>
         <h6>@{post.author.username}</h6>
       </div>
       <hr />

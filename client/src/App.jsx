@@ -12,7 +12,8 @@ import {
   Profile,
   ProfileForm,
   PostForm,
-  PostDetail
+  PostDetail,
+  User
 } from "./pages";
 
 const App = () => {
@@ -61,6 +62,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path='profile/:userId' element={<User />} />
           <Route path='/:postId' element={<PostDetail />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
