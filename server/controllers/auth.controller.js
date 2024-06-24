@@ -38,7 +38,7 @@ export const login = async (req, res, next) => {
     });
   } else {
     jwt.sign(
-      { id: user._id, email: user.email, username: user.username, profile: user.profile },
+      { _id: user._id, email: user.email, username: user.username, profile: user.profile },
       process.env.SECRET_KEY,
       { expiresIn: "1h" },
       (err, token) => {
@@ -153,12 +153,12 @@ export const verify = (req, res, next) => {
             error: err
         })
     }else{
-        const user = await User.findById(data.id)
+        const user = await User.findById(data._id)
         return res.status(200).json({
             success: true,
             message: "Valid Token",
             data: {
-              id: user._id,
+              _id: user._id,
               email: user.email ,
               username: user.username,
               profile: user.profile

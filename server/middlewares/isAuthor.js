@@ -6,7 +6,7 @@ import Post from "../models/post.model.js";
 
 const isAuthor = async (req, res, next) => {
   try {
-    const user = await User.findById(jwt.decode(req.token).id);
+    const user = await User.findById(jwt.decode(req.token)._id);
     const { postId } = req.params;
 
     if (!user) {

@@ -58,11 +58,12 @@ const App = () => {
             path="/create_post"
             element={
               <ProtectedRoute>
-                <PostForm />
+                <PostForm updating={false} />
               </ProtectedRoute>
             }
           />
           <Route path='profile/:userId' element={<User />} />
+          <Route path='update_post/:postId' element={<PostForm updating={true} />} />
           <Route path='/:postId' element={<PostDetail />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>

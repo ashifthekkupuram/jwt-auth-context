@@ -10,7 +10,7 @@ const User = () => {
   const navigate = useNavigate();
   const { user } = useContext(authContext);
   const [posts, setPosts] = useState([]);
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState({});
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -30,6 +30,12 @@ const User = () => {
     fetchUser();
   }, [userId]);
 
+  useEffect(()=>{
+    if(user._id === profile._id){
+      navigate('/profile')
+    }
+  },[profile, user, navigate])
+
   return (
     <div className="container">
       {error ? (
@@ -44,7 +50,7 @@ const User = () => {
           <div className="profile-contents">posts</div>
           <div className="profile-posts-container">
             {posts.map((post) => (
-              <Post post={post} />
+              <Post key={post._id} post={post} />
             ))}
           </div>
         </>

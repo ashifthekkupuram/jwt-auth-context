@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(()=>{
     const fetchUser = async () => {
       try{
-        const response = await axios(`/user/${user.id}`)
+        const response = await axios(`/user/${user._id}`)
         setPosts(response.data.posts)
       }catch(err){
         console.log(err)

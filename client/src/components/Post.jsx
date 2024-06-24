@@ -23,9 +23,9 @@ const Post = ({ post,onDelete }) => {
         <Link style={{ backgroundColor: "blue" }} to={`/${post._id}`} >
           View
         </Link>
-        {user?.id === post.author._id ? (
+        {user?._id === post.author._id ? (
           <>
-            <Link style={{ backgroundColor: "green" }} to="profile">
+            <Link style={{ backgroundColor: "green" }} to={`/update_post/${post._id}`}>
               Edit
             </Link>
             <button style={{ backgroundColor: "red" }} onClick={() => onDelete(post)}>

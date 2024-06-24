@@ -38,9 +38,9 @@ const PostDetail = () => {
                 at {moment(post.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
               </small>
             </div>
-            {user?.id === post.author._id ? (
+            {user?._id === post.author._id ? (
               <div className="post-a">
-                <Link style={{ backgroundColor: "green" }} to="profile">
+                <Link style={{ backgroundColor: "green" }} to={`/update_post/${post._id}`}>
                   Edit
                 </Link>
                 <button onClick={(e) => setShowModal(true)} style={{ backgroundColor: "red" }} to="profile">

@@ -28,13 +28,18 @@ const storage = multer.diskStorage({
         if(extname && mimeType){
             done(null, file.fieldname + '-' + prefix)
         }else{
-            done(new Error('File type not supported'))
+            const error = new Error('File type not supported')
+            error.status = 400
+            done(error, false)
         }
     }
 })
 
 const upload = multer({
     storage,
+    limits: {
+        fileSize: 5 * 1000 * 1000
+    }
 })
 
 export default upload
