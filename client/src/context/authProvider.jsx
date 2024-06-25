@@ -1,44 +1,39 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from "react";
 
-import axios from '../api/axios'
-import Loading from '../components/Loading'
+import axios from "../api/axios";
 
-export const authContext = createContext()
+export const authContext = createContext();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(()=>{
-        const verifyToken = async () => {
-            const token = localStorage.getItem('token')
-            if(token){
-                try{
-                    const response = await axios.post('/auth/verify', {token})
-                    setUser(response.data.data)
-                }catch(err){
-                    localStorage.removeItem('token')
-                    setUser(null)
-                }
-            }else{
-                setUser(null)
-            }
+  useEffect(() => {
+    const verifyToken = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const response = await axios.post("/auth/verify", { token });
+          setUser(response.data.data);
+        } catch (err) {
+          localStorage.removeItem("token");
+          setUser(null);
         }
-        verifyToken()
-        setLoading(false)
-        
-    },[])
+      } else {
+        setUser(null);
+      }
+    };
+    verifyToken();
+  }, []);
 
-    const updateUser = (updatedUser) => {
-        setUser(updatedUser);
-      };
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
 
-    return (
-        loading ? <Loading/> :<authContext.Provider value={{user, setUser: updateUser}}>
-        {children}
+  return (
+    <authContext.Provider value={{ user, setUser: updateUser }}>
+      {children}
     </authContext.Provider>
-    )
-}
+  );
+};
 
-export default AuthProvider
+export default AuthProvider;

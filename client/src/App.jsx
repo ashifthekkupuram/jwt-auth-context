@@ -13,7 +13,7 @@ import {
   ProfileForm,
   PostForm,
   PostDetail,
-  User
+  User,
 } from "./pages";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-        <Route
+          <Route
             path="/login"
             element={
               <AuthenticatedRoute>
@@ -37,7 +37,7 @@ const App = () => {
               </AuthenticatedRoute>
             }
           />
-          <Route path='/' element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/profile"
             element={
@@ -53,7 +53,8 @@ const App = () => {
                 <ProfileForm />
               </ProtectedRoute>
             }
-          />,
+          />
+          ,
           <Route
             path="/create_post"
             element={
@@ -62,9 +63,16 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path='profile/:userId' element={<User />} />
-          <Route path='update_post/:postId' element={<PostForm updating={true} />} />
-          <Route path='/:postId' element={<PostDetail />} />
+          <Route path="profile/:userId" element={<User />} />
+          <Route
+            path="update_post/:postId"
+            element={
+              <ProtectedRoute>
+                <PostForm updating={true} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/:postId" element={<PostDetail />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>

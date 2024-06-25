@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link,useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import { authContext } from "../context/authProvider";
 
@@ -13,12 +12,11 @@ const Nav = () => {
     localStorage.removeItem('token')
     setUser(null)
     navigate('/login')
-    toast.success('Logged Out')
   }
 
   return (
     <div className="nav">
-      <h1>Auth Basics</h1>
+      <h1>Blogs </h1>
       <ul>
         {user ? (
           <>

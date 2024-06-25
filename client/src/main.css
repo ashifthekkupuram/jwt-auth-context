@@ -4,8 +4,8 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.main{
-  margin-top: 5rem
+.main {
+  margin-top: 5rem;
 }
 
 .container {
@@ -75,7 +75,7 @@ body {
   transition: 0.5s;
 }
 
-.nav ul li button:hover{
+.nav ul li button:hover {
   color: black;
 }
 
@@ -175,7 +175,7 @@ body {
   border: 2px solid rgb(80, 99, 119);
 }
 
-.profile h1{
+.profile h1 {
   color: white;
   background-color: rgb(80, 99, 119);
   padding: 5px;
@@ -209,7 +209,7 @@ body {
   display: flex;
 }
 
-.post-header h6{
+.post-header h6 {
   margin: 0;
   margin-top: 10px;
   margin-left: 5px;
@@ -230,20 +230,20 @@ body {
   flex-direction: column;
 }
 
-.post-main h3{
+.post-main h3 {
   color: white;
   margin: 0;
   font-size: 25px;
 }
 
-.post-main p{
+.post-main p {
   color: white;
   margin: 0;
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
-.post-main img{
+.post-main img {
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
@@ -254,7 +254,7 @@ body {
   gap: 3px;
 }
 
-.post-footer a{
+.post-footer a {
   text-decoration: none;
   color: white;
   border-radius: 5px;
@@ -268,7 +268,6 @@ body {
   border-radius: 5px;
   padding: 7px;
   font-size: 15px;
-
 }
 
 .post-container {
@@ -298,7 +297,7 @@ body {
   margin-left: 20px;
 }
 
-.post-a{
+.post-a {
   display: flex;
   gap: 5px;
   padding: 0px 20px;
@@ -341,7 +340,7 @@ body {
   border-radius: 50%;
 }
 
-.post-author h6{
+.post-author h6 {
   color: white;
   margin-top: 10px;
   margin-left: 5px;
@@ -351,52 +350,9 @@ body {
   display: none;
 }
 
-:root {
-  --bg: #1c1717;
-}
-@property --a {
-  initial-value: 0deg;
-  inherits: false;
-  syntax: '<angle>';
-}
-@property --h {
-  initial-value: 0;
-  inherits: false;
-  syntax: '<number>';
-}
-.loader {
-  padding: 2rem 4rem;
-  font-family: monospace;
-  font-weight: bold;
-  color: black;
-  border-style: solid;
-  border-width: 1vmin;
-  font-size: 2rem;
-  --charge: hsl(var(--h, 0), 80%, 50%);
-  -o-border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
-     border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
-  -webkit-animation: load 2s infinite ease-in-out;
-          animation: load 2s infinite ease-in-out;
-}
-@-webkit-keyframes load {
-  0%, 10% {
-    --a: 0deg;
-    --h: 0;
-  }
-  100% {
-    --a: 360deg;
-    --h: 100;
-  }
-}
-@keyframes load {
-  0%, 10% {
-    --a: 0deg;
-    --h: 0;
-  }
-  100% {
-    --a: 360deg;
-    --h: 100;
-  }
+.error {
+  padding: 1rem;
+  color: slategrey;
 }
 
 .modal-overlay {
@@ -439,7 +395,8 @@ body {
   gap: 10px;
 }
 
-.modal-cancel, .modal-delete {
+.modal-cancel,
+.modal-delete {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -453,4 +410,9 @@ body {
 .modal-delete {
   background: #e74c3c;
   color: white;
+}
+
+.loading {
+  margin-left: 45%;
+  margin-top: 20%;
 }

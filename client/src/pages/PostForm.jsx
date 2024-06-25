@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import axios from "../api/axios";
-import {authContext} from "../context/authProvider";
+import { authContext } from "../context/authProvider";
 
 const PostForm = ({ updating }) => {
   const { user } = useContext(authContext);
@@ -29,49 +29,23 @@ const PostForm = ({ updating }) => {
     setLoading(true);
     setError(null);
     e.preventDefault();
-    if (updating) {
-      try {
-        if (form.image) {
-          const formData = new FormData();
-          formData.append("title", form.title);
-          formData.append("description", form.description);
-          formData.append("image", form.image);
-
-          const response = await axios.put(`/post/${postId}`, formData, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          navigate("/");
-          toast.success("Post Updated!");
-        } else {
-          const formData = new FormData();
-          formData.append("title", form.title);
-          formData.append("description", form.description);
-          const response = await axios.put(`/post/${postId}`, formData, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          navigate("/");
-          toast.success("Post Updated!");
-        }
-      } catch (err) {
-        if (err?.response) {
-          setError(err.response.data.message);
-          console.log(err.response.data.error);
-        } else {
-          setError("Internal Server Error");
-        }
-      }
-    } else {
-      try {
-        const formData = new FormData();
-        formData.append("title", form.title);
-        formData.append("description", form.description);
+    try {
+      const formData = new FormData();
+      formData.append("title", form.title);
+      formData.append("description", form.description);
+      if (form.image) {
         formData.append("image", form.image);
+      }
+      if (updating) {
+        const response = await axios.put(`/post/${postId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        navigate("/");
+        toast.success("Post Updated!");
+      } else {
         const response = await axios.post("/post", formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,15 +54,16 @@ const PostForm = ({ updating }) => {
         });
         navigate("/");
         toast.success("Post Created!");
-      } catch (err) {
-        if (err?.response) {
-          setError(err.response.data.message);
-          console.log(err.response.data.error);
-        } else {
-          setError("Internal Server Error");
-        }
+      }
+    } catch (err) {
+      if (err?.response) {
+        setError(err.response.data.message);
+        console.log(err.response.data.error);
+      } else {
+        setError("Internal Server Error");
       }
     }
+
     setLoading(false);
   };
 
@@ -145,7 +120,7 @@ const PostForm = ({ updating }) => {
           required
         />
         <label htmlFor="image">Image : </label>
-        <input type="file" name="image" id="image" onChange={onChange} />
+        <input type="file" name="image" id="image" onChange={onChange} required={updating ? false : true} />
         <button
           disabled={
             updating
