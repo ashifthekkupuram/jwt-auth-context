@@ -5,9 +5,10 @@ import path from 'path'
 import fs from 'fs'
 dotenv.config()
 
-import authRouter from './routes/auth.route.js'
+import AuthRouter from './routes/auth.route.js'
 import UserRouter from './routes/user.route.js'
-import postRouter from './routes/post.route.js'
+import PostRouter from './routes/post.route.js'
+import CommentRouter from './routes/comment.route.js'
 
 import Error from './middlewares/Error.js'
 import isAuthenticated from './middlewares/isAuthenticated.js'
@@ -37,9 +38,10 @@ app.use('/uploads', express.static(uploadsDir))
 DB_CONNECT()
 
 // Router for Authentication
-app.use('/api/auth', authRouter)
+app.use('/api/auth', AuthRouter)
 app.use('/api/user', UserRouter)
-app.use('/api/post', postRouter)
+app.use('/api/post', PostRouter)
+app.use('/api/comment', CommentRouter)
 
 // Middlewares
 app.use(Error)
