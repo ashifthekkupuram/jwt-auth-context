@@ -82,7 +82,7 @@ const PostDetail = () => {
              
           ) : null}
           { user ? <CommentInputSection postId={postId} /> : null }
-          <CommentSection postId={postId} />
+          <CommentSection userId={post.author?._id} postId={postId} />
         </>
         
       </div>

@@ -486,7 +486,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 6%;
-  gap: 5px;
+  gap: 2px;
 }
 
 .comment-avatar small {

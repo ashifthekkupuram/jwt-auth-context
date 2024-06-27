@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 
 import axios from "../api/axios";
 import Loading from "react-loading";
+import { authContext } from "../context/authProvider";
 
-const CommentSection = ({ postId }) => {
+const CommentSection = ({ userId,postId }) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(authContext);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -42,10 +44,17 @@ const CommentSection = ({ postId }) => {
                 <div className="comment-avatar">
                   <img src={comment.author.profile} alt="profile" />
                   <small>@{comment.author.username}</small>
+                  {comment.author._id === userId ? <>
+                    <small>(author)</small>
+                  </> : null}
                 </div>
                 <div className="comment-content">
-                <p>{comment.content}</p>
-                <small>{moment(comment.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</small>
+                  <p>{comment.content}</p>
+                  <small>
+                    {moment(comment.createdAt).format(
+                      "MMMM Do YYYY, h:mm:ss a"
+                    )}
+                  </small>
                 </div>
               </div>
             );
