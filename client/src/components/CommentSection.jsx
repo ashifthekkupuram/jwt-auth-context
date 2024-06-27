@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
+import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import axios from "../api/axios";
 import Loading from "react-loading";
 import { authContext } from "../context/authProvider";
 
-const CommentSection = ({ userId,postId }) => {
+const CommentSection = ({ userId, postId }) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,6 +32,21 @@ const CommentSection = ({ userId,postId }) => {
     fetchComments();
   }, [postId, comments]);
 
+  const onDelete = async (commentId) => {
+    try {
+      await axios.delete(`/comment/${commentId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      toast.success("Comment Deleted");
+    } catch (err) {
+      if (err?.response) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("Internal Server Error");
+      }
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -44,9 +61,11 @@ const CommentSection = ({ userId,postId }) => {
                 <div className="comment-avatar">
                   <img src={comment.author.profile} alt="profile" />
                   <small>@{comment.author.username}</small>
-                  {comment.author._id === userId ? <>
-                    <small>(author)</small>
-                  </> : null}
+                  {comment.author._id === userId ? (
+                    <>
+                      <small>(author)</small>
+                    </>
+                  ) : null}
                 </div>
                 <div className="comment-content">
                   <p>{comment.content}</p>
@@ -54,6 +73,10 @@ const CommentSection = ({ userId,postId }) => {
                     {moment(comment.createdAt).format(
                       "MMMM Do YYYY, h:mm:ss a"
                     )}
+                    {comment.author._id === user?._id ||
+                    comment.post.author === user?._id ? (
+                      <MdDelete className="icon" onClick={(e)=>onDelete(comment._id)} color="red" />
+                    ) : null}
                   </small>
                 </div>
               </div>

@@ -32,7 +32,7 @@ export const get_comments = async (req, res, next) => {
       });
     }
 
-    const comments = await Comment.find({post,}).populate('author', 'username profile').sort('-updatedAt')
+    const comments = await Comment.find({post,}).populate('author', 'username profile').populate('post').sort('-updatedAt')
 
     return res.status(200).json({
         success: true,
@@ -103,6 +103,26 @@ export const create_comment = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: 'Comment added'
+    })
+
+  }catch(err){
+    return res.status(400).json({
+      success: false,
+      message: "Something went wrong",
+      error: err
+    });
+  }
+}
+
+export const delete_comment = async (req, res, next) => {
+  try{
+    const { commentId } = req.params
+
+    await Comment.findByIdAndDelete(commentId)
+
+    res.status(200).json({
+      success: true,
+      message: 'Comment deleted'
     })
 
   }catch(err){

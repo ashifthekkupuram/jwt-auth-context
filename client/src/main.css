@@ -526,3 +526,9 @@ body {
   font-size: large;
   font-weight: 600;
 }
+
+.icon {
+  margin: 0;
+  margin-left: 5px;
+  margin-top: 2px;
+}
