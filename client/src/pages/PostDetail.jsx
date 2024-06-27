@@ -2,10 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import moment from "moment";
 import ReactLoading from "react-loading";
+import { ToastContainer } from "react-toastify";
 
 import axios from "../api/axios";
 import { authContext } from "../context/authProvider";
 import PostDeleteModal from "../components/PostDeleteModal";
+import CommentInputSection from "../components/CommentInputSection";
+import CommentSection from '../components/CommentSection'
 
 const PostDetail = () => {
   const { postId } = useParams();
@@ -76,9 +79,12 @@ const PostDetail = () => {
                 Delete
               </button>
             </div>
+             
           ) : null}
+          { user ? <CommentInputSection postId={postId} /> : null }
+          <CommentSection postId={postId} />
         </>
-        )
+        
       </div>
       {showModal ? (
         <PostDeleteModal
@@ -88,6 +94,7 @@ const PostDetail = () => {
           onHome={false}
         />
       ) : null}
+      <ToastContainer />
     </>
   );
 };

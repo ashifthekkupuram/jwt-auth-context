@@ -32,7 +32,7 @@ export const get_comments = async (req, res, next) => {
       });
     }
 
-    const comments = await Comment.find({post,}).populate('author', 'username profile')
+    const comments = await Comment.find({post,}).populate('author', 'username profile').sort('-updatedAt')
 
     return res.status(200).json({
         success: true,

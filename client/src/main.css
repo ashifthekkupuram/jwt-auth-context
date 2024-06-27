@@ -192,6 +192,7 @@ body {
 }
 
 .posts-container {
+  width: 100%;
   padding: 20px;
   display: grid;
   gap: 8px;
@@ -312,6 +313,10 @@ body {
   margin-bottom: 20px;
 }
 
+.post-a button:hover {
+  cursor: pointer;
+}
+
 .post-a button {
   color: white;
   border: none;
@@ -415,4 +420,109 @@ body {
 .loading {
   margin-left: 45%;
   margin-top: 20%;
+}
+
+.comment-input-section {
+  padding: 10px;
+  display: flex;
+}
+
+.comment-input-section textarea {
+  padding: 8px 10px;
+  font-size: 15px;
+  min-width: 350px;
+  max-width: 600px;
+  min-height: 10px;
+  border: none;
+  border: 1px solid rgb(84, 97, 110);
+  background-color: slategray;
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  color: white;
+}
+
+.comment-input-section button {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.comment-input-section button:active {
+  text-decoration: none;
+}
+
+.comment-input-section button:hover {
+  cursor: pointer;
+}
+
+.comment-input-section button:disabled {
+  opacity: 50%;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  align-items: start;
+  width: 100%;
+}
+
+.comment {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.comment-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 6%;
+  gap: 5px;
+}
+
+.comment-avatar small {
+  color: rgba(255, 255, 255, 0.882);
+  font-size: xx-small;
+}
+
+.comment-avatar img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  gap: 5px;
+  width: 90%;
+}
+
+.comment-content p {
+  font-size: small;
+  font-weight: 400;
+  width: 100%;
+  margin: 0;
+}
+
+.comment-content small {
+  font-size: x-small;
+}
+
+.comment-error {
+  font-size: large;
+  font-weight: 600;
 }
