@@ -4,6 +4,10 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+body::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
 .main {
   margin-top: 5rem;
 }
@@ -192,7 +196,7 @@ body {
 }
 
 .posts-container {
-  width: 100%;
+  width: 95%;
   padding: 20px;
   display: grid;
   gap: 8px;
@@ -532,3 +536,44 @@ body {
   margin-left: 5px;
   margin-top: 2px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.pagination button {
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  color: white;
+  background-color: slategray;
+ 
+}
+
+.pagination button:disabled {
+  opacity: 50%;
+}
+
+.pagination button:hover:disabled {
+  background-color: slategray;
+}
+
+.pagination button:hover{
+  background-color: rgb(101, 116, 130);
+}
+
+.search-input {
+  text-decoration: none;
+  height: 20px;
+  width: 300px;
+  border-radius: 5px;
+  margin-left: 20px;
+  border: 1px solid slategray;
+  padding: 5px;
+  outline: none;
+}
+
+

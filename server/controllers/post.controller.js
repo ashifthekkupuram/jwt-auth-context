@@ -7,16 +7,52 @@ import User from "../models/user.model.js";
 const TITLE_REGEX = /^.{6,50}$/;
 const DESCRIPTION_REGEX = /^.{6,}$/;
 
+const PAGE_LIMIT = 8;
+
 export const get_posts = async (req, res, next) => {
   try {
-    const posts = await Post.find()
-      .populate("author", "username profile")
-      .sort("-createdAt")
-      .exec();
+    const page = req.query.page || 1;
+    const search = req.query.search || "";
+
+    const query = {
+      $or: [
+        {
+          title: {
+            $regex: search,
+            $options: "i",
+          },
+        },
+        {
+          discription: {
+            $regex: search,
+            $options: "i",
+          },
+        },
+      ],
+    };
+
+    const skip = (page - 1) * PAGE_LIMIT;
+
+    const [count, posts] = await Promise.all([
+      Post.countDocuments(query),
+      Post.find(query)
+        .limit(PAGE_LIMIT)
+        .skip(skip)
+        .populate("author", "username profile")
+        .sort("-createdAt")
+        .exec(),
+    ]);
+
+    const pageCount = Math.ceil(count / PAGE_LIMIT);
+
     return res.status(200).json({
       success: true,
       message: "Post retrieved successfully",
       posts,
+      pagination: {
+        pageCount: pageCount === 0 ? 1 : pageCount,
+        page,
+      },
     });
   } catch (err) {
     return res.status(400).json({
@@ -199,14 +235,13 @@ export const update_post = async (req, res, next) => {
         await Post.findByIdAndUpdate(postId, {
           title: title.trim(),
           description: description.trim(),
-          image: `http://localhost:${process.env.PORT}/uploads/${image.filename}`
+          image: `http://localhost:${process.env.PORT}/uploads/${image.filename}`,
         });
 
         return res.status(200).json({
-            success: true,
-            message: 'Post Updated'
-        })
-
+          success: true,
+          message: "Post Updated",
+        });
       } catch (err) {
         return res.status(400).json({
           success: false,
@@ -215,23 +250,23 @@ export const update_post = async (req, res, next) => {
         });
       }
     } else {
-        try {
-            await Post.findByIdAndUpdate(postId, {
-              title: title.trim(),
-              description: description.trim(),
-            });
+      try {
+        await Post.findByIdAndUpdate(postId, {
+          title: title.trim(),
+          description: description.trim(),
+        });
 
-            return res.status(200).json({
-                success: true,
-                message: 'Post Updated'
-            })
-          } catch (err) {
-            return res.status(400).json({
-              success: false,
-              message: "Something went wrong",
-              error: err,
-            });
-          } 
+        return res.status(200).json({
+          success: true,
+          message: "Post Updated",
+        });
+      } catch (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Something went wrong",
+          error: err,
+        });
+      }
     }
   } catch (err) {
     return res.status(400).json({
