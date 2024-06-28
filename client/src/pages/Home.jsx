@@ -68,7 +68,15 @@ const Home = () => {
 
   return (
     <>
-      <input className="search-input" value={search} onChange={onChange} placeholder="Search..." type="text" name="search" id="search" />
+      <input
+        className="search-input"
+        value={search}
+        onChange={onChange}
+        placeholder="Search..."
+        type="text"
+        name="search"
+        id="search"
+      />
       {loading ? (
         <ReactLoading
           className="loading"
@@ -84,17 +92,21 @@ const Home = () => {
       ) : (
         <>
           <div className="posts-container">
-            {posts.length > 0
-              ? posts.map((post) => {
-                  return (
-                    <Post
-                      key={post._id}
-                      post={post}
-                      onDelete={handleDeleteClick}
-                    />
-                  );
-                })
-              : search === "" ? <h1 className="error">No posts available</h1> : <h1 className="error">No Results found for "{search}"</h1>}
+            {posts.length > 0 ? (
+              posts.map((post) => {
+                return (
+                  <Post
+                    key={post._id}
+                    post={post}
+                    onDelete={handleDeleteClick}
+                  />
+                );
+              })
+            ) : search === "" ? (
+              <h1 className="error">No posts available</h1>
+            ) : (
+              <h1 className="error">No Results found for "{search}"</h1>
+            )}
           </div>
           <div className="pagination">
             <button disabled={page === 1} onClick={previousHandler}>

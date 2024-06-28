@@ -13,7 +13,7 @@ const User = () => {
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({});
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,23 +21,23 @@ const User = () => {
         const response = await axios(`/user/${userId}`);
         setProfile(response.data.user);
         setPosts(response.data.posts);
-        setError(null)
-        setLoading(false)
+        setError(null);
+        setLoading(false);
       } catch (err) {
         if (err?.response) {
           setError(err.response.data.message);
         } else {
           setError("Internal Server Error");
         }
-        setLoading(false)
+        setLoading(false);
       }
     };
-    setLoading(true)
+    setLoading(true);
     fetchUser();
   }, [userId]);
 
   useEffect(() => {
-    if (user && (user._id === profile?._id)) {
+    if (user && user._id === profile?._id) {
       navigate("/profile");
     }
   }, [profile, user, navigate]);
@@ -53,7 +53,7 @@ const User = () => {
   ) : (
     <div className="container">
       {error ? (
-        <h1 style={{color: "slategray"}}>{error}</h1>
+        <h1 style={{ color: "slategray" }}>{error}</h1>
       ) : (
         <>
           <div className="profile">

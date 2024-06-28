@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 
 import { authContext } from "../context/authProvider";
 
-const Post = ({ post,onDelete }) => {
+const Post = ({ post, onDelete }) => {
   const { user } = useContext(authContext);
 
   return (
     <div className="post">
       <div className="post-header">
-        <Link to={`/profile/${post.author._id}`}><img src={post.author.profile} alt="" /></Link>
+        <Link to={`/profile/${post.author._id}`}>
+          <img src={post.author.profile} alt="" />
+        </Link>
         <h6>@{post.author.username}</h6>
       </div>
       <hr />
@@ -20,15 +22,21 @@ const Post = ({ post,onDelete }) => {
       </div>
       <hr />
       <div className="post-footer">
-        <Link style={{ backgroundColor: "blue" }} to={`/${post._id}`} >
+        <Link style={{ backgroundColor: "blue" }} to={`/${post._id}`}>
           View
         </Link>
         {user?._id === post.author._id ? (
           <>
-            <Link style={{ backgroundColor: "green" }} to={`/update_post/${post._id}`}>
+            <Link
+              style={{ backgroundColor: "green" }}
+              to={`/update_post/${post._id}`}
+            >
               Edit
             </Link>
-            <button style={{ backgroundColor: "red" }} onClick={() => onDelete(post)}>
+            <button
+              style={{ backgroundColor: "red" }}
+              onClick={() => onDelete(post)}
+            >
               Delete
             </button>
           </>

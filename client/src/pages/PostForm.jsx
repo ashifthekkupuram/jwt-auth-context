@@ -120,7 +120,13 @@ const PostForm = ({ updating }) => {
           required
         />
         <label htmlFor="image">Image : </label>
-        <input type="file" name="image" id="image" onChange={onChange} required={updating ? false : true} />
+        <input
+          type="file"
+          name="image"
+          id="image"
+          onChange={onChange}
+          required={updating ? false : true}
+        />
         <button
           disabled={
             updating

@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
-import { MdDelete,MdEdit  } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 
 import axios from "../api/axios";
 import Loading from "react-loading";
 import { authContext } from "../context/authProvider";
 
-const CommentSection = ({ userId, postId,setCommentId, setCommentUpdating }) => {
+const CommentSection = ({
+  userId,
+  postId,
+  setCommentId,
+  setCommentUpdating,
+}) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,10 +52,10 @@ const CommentSection = ({ userId, postId,setCommentId, setCommentUpdating }) => 
     }
   };
 
-  const onUpdate =  async (commentId) => {
-    setCommentId(commentId)
-    setCommentUpdating(true)
-  }
+  const onUpdate = async (commentId) => {
+    setCommentId(commentId);
+    setCommentUpdating(true);
+  };
 
   return (
     <>
@@ -78,12 +83,24 @@ const CommentSection = ({ userId, postId,setCommentId, setCommentUpdating }) => 
                     {moment(comment.createdAt).format(
                       "MMMM Do YYYY, h:mm:ss a"
                     )}
-                    {moment(comment.createdAt).valueOf() !== moment(comment.updatedAt).valueOf() ? "(edited)" : null}
+                    {moment(comment.createdAt).valueOf() !==
+                    moment(comment.updatedAt).valueOf()
+                      ? "(edited)"
+                      : null}
                     {comment.author._id === user?._id ||
                     comment.post.author === user?._id ? (
-                      <MdDelete className="icon" onClick={(e)=>onDelete(comment._id)} color="red" />
+                      <MdDelete
+                        className="icon"
+                        onClick={(e) => onDelete(comment._id)}
+                        color="red"
+                      />
                     ) : null}
-                    { comment.author._id === user?._id ? <MdEdit onClick={(e)=>onUpdate(comment._id)} className="icon" /> : null}
+                    {comment.author._id === user?._id ? (
+                      <MdEdit
+                        onClick={(e) => onUpdate(comment._id)}
+                        className="icon"
+                      />
+                    ) : null}
                   </small>
                 </div>
               </div>

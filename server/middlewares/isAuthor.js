@@ -49,4 +49,4 @@ const isAuthor = async (req, res, next) => {
   }
 };
 
-export default isAuthor
+export default isAuthor;

@@ -4,8 +4,8 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-body::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .main {
@@ -550,7 +550,6 @@ body::-webkit-scrollbar {
   height: 30px;
   color: white;
   background-color: slategray;
- 
 }
 
 .pagination button:disabled {
@@ -561,7 +560,7 @@ body::-webkit-scrollbar {
   background-color: slategray;
 }
 
-.pagination button:hover{
+.pagination button:hover {
   background-color: rgb(101, 116, 130);
 }
 
@@ -575,5 +574,3 @@ body::-webkit-scrollbar {
   padding: 5px;
   outline: none;
 }
-
-

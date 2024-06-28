@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { authContext } from "../context/authProvider";
 
 const Nav = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, setUser } = useContext(authContext);
 
   const onClick = (e) => {
-    e.preventDefault()
-    localStorage.removeItem('token')
-    setUser(null)
-    navigate('/login')
-  }
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <div className="nav">
@@ -20,15 +20,27 @@ const Nav = () => {
       <ul>
         {user ? (
           <>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/create_post'>Create Post</Link></li>
-            <li><Link to='/profile'>Profile</Link></li>
-            <li><button onClick={onClick}>Logout</button></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/create_post">Create Post</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <button onClick={onClick}>Logout</button>
+            </li>
           </>
         ) : (
           <>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/register' >Register</Link></li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
           </>
         )}
       </ul>

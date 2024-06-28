@@ -177,43 +177,42 @@ export const update_comment = async (req, res, next) => {
 };
 
 export const get_comment = async (req, res, next) => {
-  try{
-    const { commentId } = req.params
+  try {
+    const { commentId } = req.params;
 
-    if(!commentId){
+    if (!commentId) {
       return res.status(400).json({
         success: false,
-        message: 'Comment ID required'
-      })
+        message: "Comment ID required",
+      });
     }
 
-    if(!mongoose.Types.ObjectId.isValid(commentId)){
+    if (!mongoose.Types.ObjectId.isValid(commentId)) {
       return res.status(400).json({
         success: false,
-        message: 'Invalid ID'
-      })
+        message: "Invalid ID",
+      });
     }
 
-    const comment = await Comment.findById(commentId)
+    const comment = await Comment.findById(commentId);
 
-    if(!comment){
+    if (!comment) {
       return res.status(404).json({
         success: false,
-        message: 'Comment does not exist'
-      })
+        message: "Comment does not exist",
+      });
     }
 
     return res.status(200).json({
       success: true,
-      message: 'Comment retrieved',
+      message: "Comment retrieved",
       comment,
-    })
-
-  }catch(err){
+    });
+  } catch (err) {
     return res.status(400).json({
       success: false,
-      message: 'Something went wrong',
-      error: err
-    })
+      message: "Something went wrong",
+      error: err,
+    });
   }
-}
+};

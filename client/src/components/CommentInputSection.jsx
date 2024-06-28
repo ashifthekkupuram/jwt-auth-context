@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
 import { toast } from "react-toastify";
 
@@ -24,10 +24,10 @@ const CommentInputSection = ({
             },
           }
         );
-        setCommentId(null)
-        setCommentUpdating(false)
-        setComment('')
-        toast.success('Comment updated')
+        setCommentId(null);
+        setCommentUpdating(false);
+        setComment("");
+        toast.success("Comment updated");
       } else {
         await axios.post(
           `/comment/${postId}`,
@@ -38,7 +38,7 @@ const CommentInputSection = ({
             },
           }
         );
-        setComment('')
+        setComment("");
         toast.success("Comment added");
       }
     } catch (err) {
@@ -86,7 +86,7 @@ const CommentInputSection = ({
           style={{ backgroundColor: "red" }}
           onClick={(e) => {
             setCommentId(null);
-            setComment('')
+            setComment("");
             setCommentUpdating(false);
           }}
         >

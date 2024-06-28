@@ -38,23 +38,28 @@ export const login = async (req, res, next) => {
     });
   } else {
     jwt.sign(
-      { _id: user._id, email: user.email, username: user.username, profile: user.profile },
+      {
+        _id: user._id,
+        email: user.email,
+        username: user.username,
+        profile: user.profile,
+      },
       process.env.SECRET_KEY,
       { expiresIn: "1h" },
       (err, token) => {
-        if(err){
-            return res.status(400).json({
-                success: false,
-                message: 'Something went wrong',
-                error: err
-            })
-        }else{
-            return res.status(200).json({
-                success: true,
-                message: 'Login Successful',
-                token,
-                data: jwt.decode(token, process.env.SECRET_KEY)
-            })
+        if (err) {
+          return res.status(400).json({
+            success: false,
+            message: "Something went wrong",
+            error: err,
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            message: "Login Successful",
+            token,
+            data: jwt.decode(token, process.env.SECRET_KEY),
+          });
         }
       }
     );
@@ -135,36 +140,34 @@ export const register = async (req, res, next) => {
 };
 
 export const verify = (req, res, next) => {
+  const { token } = req.body;
 
-  const { token } = req.body
-
-  if(!token){
+  if (!token) {
     return res.status(400).json({
-        success: false,
-        message: 'Please provide credentials'
-    })
+      success: false,
+      message: "Please provide credentials",
+    });
   }
 
   jwt.verify(token, process.env.SECRET_KEY, async (err, data) => {
-    if(err){
-        return res.status(400).json({
-            success: false,
-            message: "Invalid Token",
-            error: err
-        })
-    }else{
-        const user = await User.findById(data._id)
-        return res.status(200).json({
-            success: true,
-            message: "Valid Token",
-            data: {
-              _id: user._id,
-              email: user.email ,
-              username: user.username,
-              profile: user.profile
-            }, 
-        })
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Token",
+        error: err,
+      });
+    } else {
+      const user = await User.findById(data._id);
+      return res.status(200).json({
+        success: true,
+        message: "Valid Token",
+        data: {
+          _id: user._id,
+          email: user.email,
+          username: user.username,
+          profile: user.profile,
+        },
+      });
     }
-  })
-
+  });
 };

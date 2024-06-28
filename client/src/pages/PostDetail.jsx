@@ -63,7 +63,10 @@ const PostDetail = () => {
             <h6>{post.author?.username}</h6>
             <small>
               at {moment(post.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
-              {moment(post.createdAt).valueOf() !== moment(post.updatedAt).valueOf() ? "(edited)" : null}
+              {moment(post.createdAt).valueOf() !==
+              moment(post.updatedAt).valueOf()
+                ? "(edited)"
+                : null}
             </small>
           </div>
           {user?._id === post.author?._id ? (

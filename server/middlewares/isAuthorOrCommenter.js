@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 import User from "../models/user.model.js";
 import Post from "../models/post.model.js";
-import Comment from "../models/comment.model.js"
+import Comment from "../models/comment.model.js";
 
 const isAuthorOrCommenter = async (req, res, next) => {
   try {
@@ -24,7 +24,9 @@ const isAuthorOrCommenter = async (req, res, next) => {
       });
     }
 
-    const comment = await Comment.findById(commentId).populate("author", "").populate("post","author");
+    const comment = await Comment.findById(commentId)
+      .populate("author", "")
+      .populate("post", "author");
 
     if (!comment) {
       return res.status(404).json({
@@ -33,7 +35,10 @@ const isAuthorOrCommenter = async (req, res, next) => {
       });
     }
 
-    if (comment.author._id.toString() === user._id.toString() || comment.post.author.toString() === user._id.toString()) {
+    if (
+      comment.author._id.toString() === user._id.toString() ||
+      comment.post.author.toString() === user._id.toString()
+    ) {
       return next();
     } else {
       return res.status(401).json({
@@ -50,4 +55,4 @@ const isAuthorOrCommenter = async (req, res, next) => {
   }
 };
 
-export default isAuthorOrCommenter
+export default isAuthorOrCommenter;

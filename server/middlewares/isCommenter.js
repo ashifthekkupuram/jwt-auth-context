@@ -23,7 +23,10 @@ const isCommenter = async (req, res, next) => {
       });
     }
 
-    const comment = await Comment.findById(commentId).populate("author", "username");
+    const comment = await Comment.findById(commentId).populate(
+      "author",
+      "username"
+    );
 
     if (!comment) {
       return res.status(404).json({
@@ -49,4 +52,4 @@ const isCommenter = async (req, res, next) => {
   }
 };
 
-export default isCommenter
+export default isCommenter;
