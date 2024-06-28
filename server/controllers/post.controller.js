@@ -23,7 +23,7 @@ export const get_posts = async (req, res, next) => {
           },
         },
         {
-          discription: {
+          description: {
             $regex: search,
             $options: "i",
           },
